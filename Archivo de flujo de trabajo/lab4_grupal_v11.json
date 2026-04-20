@@ -1,0 +1,1002 @@
+{
+  "id": "ee54736f-150f-466b-bd49-66cc257ac6e4",
+  "revision": 0,
+  "last_node_id": 20,
+  "last_link_id": 31,
+  "nodes": [
+    {
+      "id": 1,
+      "type": "Note",
+      "pos": [
+        1.600095354972126,
+        -121.99998546639193
+      ],
+      "size": [
+        900,
+        180
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "title": "WORKFLOW FUTBOLÍSTICO — CAMISETA PERUANA",
+      "properties": {},
+      "widgets_values": [
+        "FLUJO DE TRABAJO FUTBOLÍSTICO — JUGADORES CON CAMISETA PERUANA\n\nCARACTERÍSTICAS:\n• Genera escenas futbolísticas con 2-3 jugadores en camiseta peruana\n• Text2Img (generación pura sin referencia)\n• Coherencia visual: composición, escala, iluminación, estilo\n• Contextos: Entrenamiento, Partido, Celebración épica\n\nINSTRUCCIONES:\n1. CheckpointLoaderSimple → seleccionar modelo SD1.5\n2. Presionar Run (no requiere carga de imagen)\n\nVARIACIONES:\n  LEVE:     entrenamiento profesional en cancha | euler | steps 25 | cfg 7.0 | denoise 0.30\n  MODERADO: partido en estadio moderno lleno | dpmpp | steps 30 | cfg 8.5 | denoise 0.60\n  FUERTE:   celebración épica de gol, noche con luces | adaptive | steps 40 | cfg 12.0 | denoise 0.85"
+      ],
+      "color": "#432",
+      "bgcolor": "#653"
+    },
+    {
+      "id": 2,
+      "type": "CheckpointLoaderSimple",
+      "pos": [
+        225.59998854344815,
+        272.40002368888054
+      ],
+      "size": [
+        380,
+        131.59375
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "slot_index": 0,
+          "links": [
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "slot_index": 1,
+          "links": [
+            4,
+            5,
+            6,
+            7
+          ]
+        },
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "slot_index": 2,
+          "links": [
+            8,
+            9,
+            10,
+            28
+          ]
+        }
+      ],
+      "title": "← PASO 1: SELECCIONAR MODELO SD1.5",
+      "properties": {
+        "Node name for S&R": "CheckpointLoaderSimple"
+      },
+      "widgets_values": [
+        "dreamshaper_8.safetensors"
+      ]
+    },
+    {
+      "id": 3,
+      "type": "CLIPTextEncode",
+      "pos": [
+        981.2002082700088,
+        -154.00007701912625
+      ],
+      "size": [
+        440,
+        120
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 4
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "slot_index": 0,
+          "links": [
+            11,
+            12,
+            13
+          ]
+        }
+      ],
+      "title": "Prompt NEGATIVO — evitar malformaciones futbolísticas",
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "(deformed, distorted:1.3), poorly drawn faces, bad anatomy, missing limbs, extra limbs, floating limbs, (mutated hands:1.4), blurry, poorly drawn, mutation, ugly, disgusting, bad proportions, wrong jersey design, asymmetrical bodies, merged bodies, bad football field, impossible poses"
+      ]
+    },
+    {
+      "id": 4,
+      "type": "CLIPTextEncode",
+      "pos": [
+        977.2002082700088,
+        28.40005420645923
+      ],
+      "size": [
+        440,
+        150
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 5
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "slot_index": 0,
+          "links": [
+            14
+          ]
+        }
+      ],
+      "title": "Prompt LEVE — Entrenamiento profesional (denoise 0.30)",
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "three professional Peruvian soccer players in red and white jersey training on football field, sharp focus on faces, daylight natural lighting, professional sports photography, realistic proportions, balanced composition, detailed facial features, athletic builds, peruvian flag colors on uniform, 8k uhd, photorealistic, identity preserved, modern training ground"
+      ]
+    },
+    {
+      "id": 5,
+      "type": "CLIPTextEncode",
+      "pos": [
+        977.2002082700088,
+        248.40002368888054
+      ],
+      "size": [
+        478.21875,
+        150
+      ],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 6
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "slot_index": 0,
+          "links": [
+            15
+          ]
+        }
+      ],
+      "title": "Prompt MODERADO — Partido en estadio moderno (denoise 0.60)",
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "three Peruvian football players in red and white kit during intense match in modern full stadium, bright stadium lighting, crowd in background blurred, dynamic action moment, ball visible, sharp focus on players faces, professional sports cinematic composition, dramatic lighting, detailed uniforms with peruvian emblems, athletic dynamic poses, 8k uhd"
+      ]
+    },
+    {
+      "id": 6,
+      "type": "CLIPTextEncode",
+      "pos": [
+        977.2002082700088,
+        468.4001457591926
+      ],
+      "size": [
+        440,
+        150
+      ],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 7
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "slot_index": 0,
+          "links": [
+            16
+          ]
+        }
+      ],
+      "title": "Prompt FUERTE — Celebración épica de gol (denoise 0.85)",
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "three Peruvian soccer players celebrating after goal at night, red and white national team jerseys glowing under stadium floodlights, euphoric moment with raised arms, dynamic explosive composition, dramatic volumetric lighting, confetti flying, roaring crowd visible blurred in background, ultra detailed faces, sharp focus, cinematic epic sports photography, peruvian flag colors dominant, 8k uhd"
+      ]
+    },
+    {
+      "id": 7,
+      "type": "KSampler",
+      "pos": [
+        1505.6001106137574,
+        -153.2000129322122
+      ],
+      "size": [
+        481.09375,
+        564.875
+      ],
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 1
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 14
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 11
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 29
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "slot_index": 0,
+          "links": [
+            20
+          ]
+        }
+      ],
+      "title": "KSampler LEVE — euler / normal / steps 25 / cfg 7.0 / denoise 0.30",
+      "properties": {
+        "Node name for S&R": "KSampler"
+      },
+      "widgets_values": [
+        1050697423504211,
+        "randomize",
+        25,
+        7,
+        "euler",
+        "normal",
+        0.3
+      ]
+    },
+    {
+      "id": 8,
+      "type": "KSampler",
+      "pos": [
+        1495.6001106137574,
+        226.80004810294315
+      ],
+      "size": [
+        560.828125,
+        564.875
+      ],
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 2
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 15
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 12
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 30
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "slot_index": 0,
+          "links": [
+            21
+          ]
+        }
+      ],
+      "title": "KSampler MODERADO — dpmpp_2m_karras / steps 30 / cfg 8.5 / denoise 0.60",
+      "properties": {
+        "Node name for S&R": "KSampler"
+      },
+      "widgets_values": [
+        972246544112631,
+        "randomize",
+        30,
+        8.5,
+        "dpmpp_2m_cfg_pp",
+        "karras",
+        0.6
+      ]
+    },
+    {
+      "id": 9,
+      "type": "KSampler",
+      "pos": [
+        1495.6001106137574,
+        626.8001701732546
+      ],
+      "size": [
+        509.4375,
+        564.875
+      ],
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 3
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 16
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 13
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 31
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "slot_index": 0,
+          "links": [
+            22
+          ]
+        }
+      ],
+      "title": "KSampler FUERTE — dpm_adaptive / steps 40 / cfg 12.0 / denoise 0.85",
+      "properties": {
+        "Node name for S&R": "KSampler"
+      },
+      "widgets_values": [
+        360814114568043,
+        "randomize",
+        40,
+        12,
+        "dpm_adaptive",
+        "karras",
+        0.85
+      ]
+    },
+    {
+      "id": 11,
+      "type": "VAEDecode",
+      "pos": [
+        2058.4007697934435,
+        57.199980964271674
+      ],
+      "size": [
+        225,
+        71.59375
+      ],
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 20
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 8
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "slot_index": 0,
+          "links": [
+            23
+          ]
+        }
+      ],
+      "title": "VAEDecode — LEVE",
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 12,
+      "type": "VAEDecode",
+      "pos": [
+        2058.4007697934435,
+        277.20007251700554
+      ],
+      "size": [
+        225,
+        71.59375
+      ],
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 21
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 9
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "slot_index": 0,
+          "links": [
+            24
+          ]
+        }
+      ],
+      "title": "VAEDecode — MODERADO",
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 13,
+      "type": "VAEDecode",
+      "pos": [
+        2058.4007697934435,
+        497.20007251700497
+      ],
+      "size": [
+        225,
+        71.59375
+      ],
+      "flags": {},
+      "order": 13,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 22
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 10
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "slot_index": 0,
+          "links": [
+            25
+          ]
+        }
+      ],
+      "title": "VAEDecode — FUERTE",
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 14,
+      "type": "SaveImage",
+      "pos": [
+        2308.801160418443,
+        -85.19995189705608
+      ],
+      "size": [
+        326.53125,
+        315.578125
+      ],
+      "flags": {},
+      "order": 14,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 23
+        }
+      ],
+      "outputs": [],
+      "title": "Guardar LEVE — Entrenamiento profesional",
+      "properties": {
+        "Node name for S&R": "SaveImage"
+      },
+      "widgets_values": [
+        "lab4_futbol/futbol_peru_leve_entrenamiento"
+      ]
+    },
+    {
+      "id": 15,
+      "type": "SaveImage",
+      "pos": [
+        2313.601209246568,
+        258.00012134513054
+      ],
+      "size": [
+        320.328125,
+        315.578125
+      ],
+      "flags": {},
+      "order": 15,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 24
+        }
+      ],
+      "outputs": [],
+      "title": "Guardar MODERADO — Partido en estadio",
+      "properties": {
+        "Node name for S&R": "SaveImage"
+      },
+      "widgets_values": [
+        "lab4_futbol/futbol_peru_moderado_partido_estadio"
+      ]
+    },
+    {
+      "id": 16,
+      "type": "SaveImage",
+      "pos": [
+        2326.400281512193,
+        634.7999260326296
+      ],
+      "size": [
+        315,
+        315.578125
+      ],
+      "flags": {},
+      "order": 16,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 25
+        }
+      ],
+      "outputs": [],
+      "title": "Guardar FUERTE — Celebración épica",
+      "properties": {
+        "Node name for S&R": "SaveImage"
+      },
+      "widgets_values": [
+        "lab4_futbol/futbol_peru_fuerte_celebracion_gol"
+      ]
+    },
+    {
+      "id": 19,
+      "type": "LoadImage",
+      "pos": [
+        265.59998854344803,
+        522.40002368888
+      ],
+      "size": [
+        282.75,
+        339.59375
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            27
+          ]
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "2e5388c9ab485da5c26cf3992932acd03adf9cc541857bbec9dca91f41911087.jpg",
+        "image"
+      ]
+    },
+    {
+      "id": 20,
+      "type": "VAEEncode",
+      "pos": [
+        643.6001716489159,
+        563.5999748607549
+      ],
+      "size": [
+        225,
+        71.59375
+      ],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "pixels",
+          "type": "IMAGE",
+          "link": 27
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 28
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            29,
+            30,
+            31
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEEncode"
+      },
+      "widgets_values": []
+    }
+  ],
+  "links": [
+    [
+      1,
+      2,
+      0,
+      7,
+      0,
+      "MODEL"
+    ],
+    [
+      2,
+      2,
+      0,
+      8,
+      0,
+      "MODEL"
+    ],
+    [
+      3,
+      2,
+      0,
+      9,
+      0,
+      "MODEL"
+    ],
+    [
+      4,
+      2,
+      1,
+      3,
+      0,
+      "CLIP"
+    ],
+    [
+      5,
+      2,
+      1,
+      4,
+      0,
+      "CLIP"
+    ],
+    [
+      6,
+      2,
+      1,
+      5,
+      0,
+      "CLIP"
+    ],
+    [
+      7,
+      2,
+      1,
+      6,
+      0,
+      "CLIP"
+    ],
+    [
+      8,
+      2,
+      2,
+      11,
+      1,
+      "VAE"
+    ],
+    [
+      9,
+      2,
+      2,
+      12,
+      1,
+      "VAE"
+    ],
+    [
+      10,
+      2,
+      2,
+      13,
+      1,
+      "VAE"
+    ],
+    [
+      11,
+      3,
+      0,
+      7,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      12,
+      3,
+      0,
+      8,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      13,
+      3,
+      0,
+      9,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      14,
+      4,
+      0,
+      7,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      15,
+      5,
+      0,
+      8,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      16,
+      6,
+      0,
+      9,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      20,
+      7,
+      0,
+      11,
+      0,
+      "LATENT"
+    ],
+    [
+      21,
+      8,
+      0,
+      12,
+      0,
+      "LATENT"
+    ],
+    [
+      22,
+      9,
+      0,
+      13,
+      0,
+      "LATENT"
+    ],
+    [
+      23,
+      11,
+      0,
+      14,
+      0,
+      "IMAGE"
+    ],
+    [
+      24,
+      12,
+      0,
+      15,
+      0,
+      "IMAGE"
+    ],
+    [
+      25,
+      13,
+      0,
+      16,
+      0,
+      "IMAGE"
+    ],
+    [
+      27,
+      19,
+      0,
+      20,
+      0,
+      "IMAGE"
+    ],
+    [
+      28,
+      2,
+      2,
+      20,
+      1,
+      "VAE"
+    ],
+    [
+      29,
+      20,
+      0,
+      7,
+      3,
+      "LATENT"
+    ],
+    [
+      30,
+      20,
+      0,
+      8,
+      3,
+      "LATENT"
+    ],
+    [
+      31,
+      20,
+      0,
+      9,
+      3,
+      "LATENT"
+    ]
+  ],
+  "groups": [
+    {
+      "id": 1,
+      "title": "LEVE (denoise 0.30) — Entrenamiento profesional en cancha",
+      "bounding": [
+        980,
+        0,
+        1580,
+        280
+      ],
+      "color": "#3d7040",
+      "font_size": 18,
+      "flags": {}
+    },
+    {
+      "id": 2,
+      "title": "MODERADO (denoise 0.60) — Partido en estadio moderno lleno",
+      "bounding": [
+        980,
+        220,
+        1580,
+        280
+      ],
+      "color": "#7d6530",
+      "font_size": 18,
+      "flags": {}
+    },
+    {
+      "id": 3,
+      "title": "FUERTE (denoise 0.85) — Celebración épica de gol",
+      "bounding": [
+        980,
+        440,
+        1580,
+        280
+      ],
+      "color": "#7d3030",
+      "font_size": 18,
+      "flags": {}
+    }
+  ],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.5000000000000012,
+      "offset": [
+        151.47789231592594,
+        318.71148754158685
+      ]
+    },
+    "info": {
+      "name": "Lab4 Futbolístico — Jugadores con Camiseta Peruana",
+      "custom_nodes_required": [],
+      "note": "Flujo Text2Img para generar escenas futbolísticas con 2-3 jugadores en camiseta peruana (roja y blanca). Variaciones: entrenamiento, partido, celebración épica."
+    },
+    "frontendVersion": "1.42.6",
+    "VHS_latentpreview": false,
+    "VHS_latentpreviewrate": 0,
+    "VHS_MetadataImage": true,
+    "VHS_KeepIntermediate": true
+  },
+  "version": 0.4
+}
